@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${queryManage.id}">
+            <input type="hidden" id="statusValue" value="${queryManage.status}">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="queryCommand" readonly="readonly" name="查询口令" underline="true" value="${queryManage.queryCommand}"/>
+                    <#input id="endDate" name="有效截止日期" underline="true" type="text"
+                            clickFun="laydate({istime: false, format: 'YYYY-MM-DD',min: laydate.now()})" value="${queryManage.endDate}"/>
+                    <#input id="totalUseTimes" name="设定使用次数" underline="true"  value="${queryManage.totalUseTimes}" />
+                    <#select id="status" name="是否启用">
+                        <option value="1" selected="selected">启用</option>
+                        <option value="0">禁用</option>
+                    </#select>
+                </div>
+                <div class="col-sm-6">
+                    <#input id="queryDesc" name="描述" underline="true" value="${queryManage.queryDesc}"/>
+                    <#input id="totalEncryptTimes" name="设定加密次数" underline="true" value="${queryManage.totalEncryptTimes}"/>
+                    <#input id="totalDecryptTimes" name="设定解密次数" underline="false" value="${queryManage.totalDecryptTimes}"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="QueryPwdManageInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="QueryPwdManageInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/queryPwdManage/queryPwdManage_info.js"></script>
+@}

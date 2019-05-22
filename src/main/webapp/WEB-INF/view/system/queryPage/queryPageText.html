@@ -1,0 +1,49 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>查询页面-文本</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="col-sm-3">
+                            <#NameCon id="condition" name="查询口令" />
+                        </div>
+
+                        <div class="ibox-content">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div style="width: 40%;float:left">
+                                        <!--<span class="control-label">输入</span>-->
+                                        <h4>输 入</h4>
+                                        <textarea style="width:90%;height:200px;overflow:scroll;resize:none;"  id="intputText"></textarea>
+                                        <span class="help-block m-b-none">一行为一个密文或明文，最多一百行</span>
+                                    </div>
+                                    <div style="width: 40%;float:left">
+                                        <h4>输 出</h4>
+                                        <textarea style="width:90%;height:200px;overflow:scroll;resize:none;" id="outputText"></textarea>
+                                        <span class="help-block m-b-none">一行为一个对应的输出结果，最多一百行</span>
+                                        <!--<input type="text" class="form-control" id="bizEnName1">-->
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <button class="btn btn-primary" onclick="QueryPageInfoDlg.encryptText()">加 密</button>
+                                        <button class="btn btn-primary" onclick="QueryPageInfoDlg.decryptText()">解 密</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/queryPage/queryPage.js"></script>
+@}

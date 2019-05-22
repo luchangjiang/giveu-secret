@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.RobotDao">
+	<sql id="Base_Column_List">
+		id, account, name, birthday, sex,
+		phone, roleid,
+		deptid, status,
+		createtime
+	</sql>
+	
+	<sql id="Base_Column_List_With_Pwd">
+		id, account, name, birthday,password, sex,
+		phone, roleid,
+		deptid, status,
+		createtime
+	</sql>
+
+	<select id="selectUsers" resultType="map">
+		select
+		<include refid="Base_Column_List" />
+		from robot
+		where status != 3
+		<if test="name != null and name != ''">
+			and  name like CONCAT('%',#{name},'%')
+		</if>
+	</select>
+
+	<update id="setStatus">
+		update robot set status = #{status} where id =
+		#{userId}
+	</update>
+
+	<update id="changePwd">
+		update robot set password = #{pwd} where id =
+		#{userId}
+	</update>
+	
+	<update id="setRoles">
+		update robot set roleid = #{roleIds} where id =
+		#{userId}
+	</update>
+	
+	<select id="getByAccount" resultType="robot">
+		select
+		<include refid="Base_Column_List_With_Pwd" />
+		from robot where account = #{account} and status != 3
+	</select>
+</mapper>

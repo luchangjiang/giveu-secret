@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.QueryPwdManageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <!--<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.QueryPwdManage">-->
+        <!--<id column="id" property="id" />-->
+        <!--<result column="query_command" property="queryCommand" />-->
+        <!--<result column="status" property="status" />-->
+        <!--<result column="end_date" property="endDate" />-->
+        <!--<result column="total_decrypt_times" property="totalDecryptTimes" />-->
+        <!--<result column="total_use_times" property="totalUseTimes" />-->
+        <!--<result column="user_times" property="userTimes" />-->
+        <!--<result column="total_decrypt_times" property="totalDecryptTimes" />-->
+        <!--<result column="decrypt_times" property="decryptTimes" />-->
+        <!--<result column="total_encrypt_times" property="totalEncryptTimes" />-->
+        <!--<result column="encrypt_times" property="encryptTimes" />-->
+        <!--<result column="query_desc" property="queryDesc" />-->
+        <!--<result column="update_time" property="updateTime" />-->
+        <!--<result column="create_time" property="createTime" />-->
+    <!--</resultMap>-->
+
+    <insert id="insert">
+        insert into secret_query_pwd(query_command ,cmd_status,end_date ,total_use_times ,use_times ,
+        total_decrypt_times ,decrypt_times ,total_encrypt_times ,encrypt_times ,query_desc)
+        value(#{queryCommand} ,#{status},#{endDate} ,#{totalUseTimes} ,#{useTimes} ,
+        #{totalDecryptTimes} ,#{decryptTimes} ,#{totalEncryptTimes} ,#{encryptTimes} ,#{queryDesc})
+    </insert>
+
+    <delete id="deleteById">
+        update secret_query_pwd set update_time=sysdate() ,cmd_status=0 where id=#{id}
+    </delete>
+
+</mapper>

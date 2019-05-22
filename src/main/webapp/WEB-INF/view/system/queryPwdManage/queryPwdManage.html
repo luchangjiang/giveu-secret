@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>查询口令管理管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="condition" name="查询口令" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="QueryPwdManage.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="QueryPwdManageTableToolbar" secretRole="group">
+                            @if(shiro.hasPermission("/queryPwdManage/add")){
+                                <#button name="添加" icon="fa-plus" clickFun="QueryPwdManage.openAddQueryPwdManage()"/>
+                            @}
+                            @if(shiro.hasPermission("/queryPwdManage/update")){
+                                <#button name="修改" icon="fa-edit" clickFun="QueryPwdManage.openQueryPwdManageDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/queryPwdManage/delete")){
+                                <#button name="禁用" icon="fa-remove" clickFun="QueryPwdManage.delete()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="QueryPwdManageTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/queryPwdManage/queryPwdManage.js"></script>
+@}

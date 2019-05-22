@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.QueryPwdManageDao">
+
+    <sql id="Base_Column_List">
+        CAST(id as CHAR) id, query_command queryCommand,cmd_status status,end_date endDate,total_decrypt_times totalDecryptTimes,
+        total_use_times totalUseTimes,use_times useTimes, total_decrypt_times totalDecryptTimes,
+        decrypt_times decryptTimes,total_encrypt_times totalEncryptTimes,encrypt_times encryptTimes,
+        query_desc queryDesc,update_time updateTime,create_time createTime
+    </sql>
+
+    <select id="selectQueryPwd" resultType="map">
+        select
+        <include refid="Base_Column_List" />
+        from secret_query_pwd
+        <if test="condition != null">
+            where query_command like CONCAT('%',#{condition},'%')
+        </if>
+        order by cmd_status desc ,update_time desc
+    </select>
+
+    <select id="getQuerPwdByPassword" resultType="QueryManage">
+        select
+        <include refid="Base_Column_List" />
+        from secret_query_pwd
+        <if test="password != null">
+            where query_command = #{password}
+        </if>
+    </select>
+
+    <select id="getQuerPwdById" resultType="QueryManage">
+        select
+        <include refid="Base_Column_List" />
+        from secret_query_pwd
+        <if test="id != null">
+            where id = #{id}
+        </if>
+    </select>
+
+    <update id="updateById">
+        update secret_query_pwd set update_time=sysdate()
+        <if test="status != null">
+            ,cmd_status=#{status}
+        </if>
+        <if test="endDate != null">
+            ,end_date=#{endDate}
+        </if>
+        <if test="totalUseTimes != null">
+            ,total_use_times=#{totalUseTimes}
+        </if>
+        <if test="totalDecryptTimes != null">
+            ,total_decrypt_times=#{totalDecryptTimes}
+        </if>
+        <if test="totalEncryptTimes != null">
+            ,total_encrypt_times=#{totalEncryptTimes}
+        </if>
+        <if test="queryDesc != null">
+            ,query_desc=#{queryDesc}
+        </if>
+        where id=#{id}
+    </update>
+
+    <insert id="insert">
+        insert into secret_query_pwd(query_command ,cmd_status,end_date ,total_use_times ,use_times ,
+        total_decrypt_times ,decrypt_times ,total_encrypt_times ,encrypt_times ,query_desc,create_time,update_time)
+        value(#{queryCommand} ,#{status},#{endDate} ,#{totalUseTimes} ,#{useTimes} ,#{totalDecryptTimes} ,
+        #{decryptTimes} ,#{totalEncryptTimes} ,#{encryptTimes} ,#{queryDesc},sysdate(),sysdate())
+    </insert>
+
+    <delete id="deleteById">
+        update secret_query_pwd set update_time=sysdate() ,cmd_status=0 where id=#{id}
+    </delete>
+
+</mapper>

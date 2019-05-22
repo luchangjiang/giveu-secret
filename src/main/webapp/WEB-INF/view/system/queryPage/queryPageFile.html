@@ -1,0 +1,49 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>查询页面-文件</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="col-sm-3">
+                            <#NameCon id="condition" name="查询口令" />
+                        </div>
+
+                        <div class="ibox-content">
+                            <div class="form-horizontal">
+                                <form id="upload-form" action="/queryPage/handleFile" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <!--<input type="file" id="uploadFile" name="fu_UploadFile" value="" title="上传文件"  accept=".xls,.xlsx" />-->
+
+                                        <div>
+                                            <input type="file" name="fileinfo" id="fileinfo" accept=".xls,.xlsx" title="上传文件" value=""/>
+                                            <input type="hidden" name="fileType" value="10"/>
+                                        </div>
+                                        <input type="hidden" name="inputType" id="inputType" value="">
+                                        <input type="hidden" name="pwd" id="pwd" value="">
+                                        <!--<input type="submit"  id="upload" value="上传"/>-->
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+
+                                </form>
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <button class="btn btn-primary" type="button" onclick="QueryPageInfoDlg.uploadFile('encryptFile')">加 密</button>
+                                        <button class="btn btn-primary" type="button" onclick="QueryPageInfoDlg.uploadFile('decryptFile')">解 密</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/queryPage/queryPage.js"></script>
+@}

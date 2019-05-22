@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.giveu.dao.mysql.QueryManageDao">
+
+    <sql id="Base_Column_List">
+        CAST(id as CHAR ) id,query_command queryCommand,cmd_status status,end_date endDate,total_decrypt_times totalDecryptTimes,
+        total_use_times totalUseTimes,use_times useTimes, total_decrypt_times totalDecryptTimes,
+        decrypt_times decryptTimes,total_encrypt_times totalEncryptTimes,encrypt_times encryptTimes,
+        query_desc queryDesc,update_time updateTime,create_time createTime
+    </sql>
+
+    <select id="getQueryManage" parameterType="string" resultType="QueryManage">
+        select
+        <include refid="Base_Column_List" />
+         from secret_query_pwd where query_command=#{queryCommand}
+    </select>
+
+    <select id="getQueryManageList" resultType="QueryManage">
+        select
+        <include refid="Base_Column_List" />
+         from secret_query_pwd
+    </select>
+
+    <update id="updateQueryUseTimes" >
+        update secret_query_pwd t set t.use_times=#{useTimes},
+        <if test="decryptTimes !=null and decryptTimes >0 ">
+            t.decrypt_times=#{decryptTimes},
+        </if>
+        <if test="encryptTimes !=null and  encryptTimes >0 ">
+            t.encrypt_times=#{encryptTimes},
+        </if>
+        t.update_time=sysdate() where t.query_command=#{pwd}
+    </update>
+</mapper>
